@@ -71,18 +71,18 @@ def cntk_check_libs():
     devnull = open(os.devnull, 'w')
     __my_system__ = platform.system().lower()
     if __my_system__ == 'windows':
-        if call(['where', 'libiomp5md*.dll'], stdout=devnull, stderr=devnull) != 0 or \
-          call(['where', 'mklml*.dll'], stdout=devnull, stderr=devnull) != 0:
+        if call(['where', 'libiomp5md*.dll'], stdout=devnull, stderr=devnull, stdin=devnull) != 0 or \
+          call(['where', 'mklml*.dll'], stdout=devnull, stderr=devnull, stdin=devnull) != 0:
             warnings.warn(WARNING_MSG % ('    MKL     ', 'https://docs.microsoft.com/en-us/cognitive-toolkit/Setup-Windows-Python#mkl'))
-        if call(['where', 'cudnn*.dll'], stdout=devnull, stderr=devnull) != 0 or \
-          call(['where', 'nvml*.dll'], stdout=devnull, stderr=devnull) != 0 or \
-          call(['where', 'nvml*.dll'], stdout=devnull, stderr=devnull) != 0 or \
-          call(['where', 'cublas*.dll'], stdout=devnull, stderr=devnull) != 0 or \
-          call(['where', 'cudart*.dll'], stdout=devnull, stderr=devnull) != 0 or \
-          call(['where', 'curand*.dll'], stdout=devnull, stderr=devnull) != 0 or \
-          call(['where', 'cusparse*.dll'], stdout=devnull, stderr=devnull) != 0:
+        if call(['where', 'cudnn*.dll'], stdout=devnull, stderr=devnull, stdin=devnull) != 0 or \
+          call(['where', 'nvml*.dll'], stdout=devnull, stderr=devnull, stdin=devnull) != 0 or \
+          call(['where', 'nvml*.dll'], stdout=devnull, stderr=devnull, stdin=devnull) != 0 or \
+          call(['where', 'cublas*.dll'], stdout=devnull, stderr=devnull, stdin=devnull) != 0 or \
+          call(['where', 'cudart*.dll'], stdout=devnull, stderr=devnull, stdin=devnull) != 0 or \
+          call(['where', 'curand*.dll'], stdout=devnull, stderr=devnull, stdin=devnull) != 0 or \
+          call(['where', 'cusparse*.dll'], stdout=devnull, stderr=devnull, stdin=devnull) != 0:
             warnings.warn(WARNING_MSG_GPU_ONLY % ('GPU-Specific', 'https://docs.microsoft.com/en-us/cognitive-toolkit/Setup-Windows-Python#optional-gpu-specific-packages'))
-        if call(['where', 'opencv_world*.dll'], stdout=devnull, stderr=devnull) != 0:
+        if call(['where', 'opencv_world*.dll'], stdout=devnull, stderr=devnull, stdin=devnull) != 0:
             warnings.warn(WARNING_MSG % ('   OpenCV   ', 'https://docs.microsoft.com/en-us/cognitive-toolkit/Setup-Windows-Python#optional-opencv'))
     elif __my_system__ == 'linux':
         if call('ldconfig -N -v $(sed "s/:/ /g" <<< $LD_LIBRARY_PATH) | grep libmklml_intel*.so*', shell=True, executable='/bin/bash', stdout=devnull, stderr=devnull) != 0 or \
